@@ -2,11 +2,15 @@
 
 public class UniversalLoaderApiSettings
 {
-    public string BaseUrl { get; set; }
+    public required string BaseApiUrl { get; set; }
 
-    public string UserId { get; set; }
+    public required string AuthenticateEndpoint { get; set; }
 
-    public string UserSecret { get; set; }
+    public required string WorkflowsEndpoint { get; set; }
 
-    public string GetWorkflows { get; set; }
+    public required string ApiCompanyId { get; set; }
+
+    public required string ApiUserId { get; set; }
+
+    public required string ApiUserSecret { get; set; }
 }

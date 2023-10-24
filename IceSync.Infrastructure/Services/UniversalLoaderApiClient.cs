@@ -16,20 +16,21 @@ namespace IceSync.Infrastructure.Services
             _httpClient = httpClient;
             _apiSettingsMonitor = apiSettingsMonitor;
 
-            _httpClient.BaseAddress = new Uri(_apiSettingsMonitor.CurrentValue.BaseUrl);
+            _httpClient.BaseAddress = new Uri(_apiSettingsMonitor.CurrentValue.BaseApiUrl);
         }
 
         public async Task<IEnumerable<Workflow>> GetWorkflowsAsync(CancellationToken cancellationToken)
         {
             var settings = _apiSettingsMonitor.CurrentValue;
-            string endpointUrl = $"{settings.BaseUrl}{settings.GetWorkflows}";
+            string endpointUrl = $"{settings.BaseApiUrl}{settings.WorkflowsEndpoint}";
 
             var response = await _httpClient.GetAsync(endpointUrl, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync(cancellationToken);
 
-                return JsonSerializer.Deserialize<IEnumerable<Workflow>>(jsonString);
+                return JsonSerializer.Deserialize<IEnumerable<Workflow>>(jsonString) ?? 
+                    throw new InvalidOperationException("Failed to deserialize response.");
             }
 
             throw new Exception($"Error fetching workflows: {response.ReasonPhrase}");
