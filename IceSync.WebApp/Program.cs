@@ -1,4 +1,6 @@
-using IceSync.Data;
+using IceSync.Infrastructure;
+using IceSync.Infrastructure.Extensions;
+using IceSync.WebApp.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<WorkflowDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+var configuration = builder.Configuration;
+builder.Services.AddWebAppServices(configuration)
+    .AddInfrastructureServices(configuration);
 
 var app = builder.Build();
 

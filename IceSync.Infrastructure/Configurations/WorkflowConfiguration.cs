@@ -1,8 +1,8 @@
-﻿using IceSync.Data.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using IceSync.Infrastructure.Models;
 
-namespace IceSync.Data.Configurations
+namespace IceSync.Infrastructure.Configurations
 {
     public class WorkflowConfiguration : IEntityTypeConfiguration<Workflow>
     {

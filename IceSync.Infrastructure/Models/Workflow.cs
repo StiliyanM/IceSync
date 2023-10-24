@@ -1,11 +1,15 @@
-﻿namespace IceSync.Data.Models
+﻿namespace IceSync.Infrastructure.Models
 {
     public class Workflow
     {
         public int WorkflowId { get; set; }
+
         public string WorkflowName { get; set; }
+
         public bool IsActive { get; set; }
+
         public bool IsRunning { get; set; }
+
         public string MultiExecBehavior { get; set; }
     }
 }

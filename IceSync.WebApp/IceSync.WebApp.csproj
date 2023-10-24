@@ -1,13 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>e96044d2-baed-468e-b1d2-d84ac578a166</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IceSync.Data\IceSync.Data.csproj" />
+    <ProjectReference Include="..\IceSync.Infrastructure\IceSync.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,38 @@
+﻿using IceSync.Infrastructure.Interfaces;
+using IceSync.Infrastructure.Models;
+using IceSync.Infrastructure.Settings;
+using Microsoft.Extensions.Options;
+using System.Text.Json;
+
+namespace IceSync.Infrastructure.Services
+{
+    public class UniversalLoaderApiClient : IUniversalLoaderApiClient
+    {
+        private readonly HttpClient _httpClient;
+        private readonly IOptionsMonitor<UniversalLoaderApiSettings> _apiSettingsMonitor;
+
+        public UniversalLoaderApiClient(HttpClient httpClient, IOptionsMonitor<UniversalLoaderApiSettings> apiSettingsMonitor)
+        {
+            _httpClient = httpClient;
+            _apiSettingsMonitor = apiSettingsMonitor;
+
+            _httpClient.BaseAddress = new Uri(_apiSettingsMonitor.CurrentValue.BaseUrl);
+        }
+
+        public async Task<IEnumerable<Workflow>> GetWorkflowsAsync(CancellationToken cancellationToken)
+        {
+            var settings = _apiSettingsMonitor.CurrentValue;
+            string endpointUrl = $"{settings.BaseUrl}{settings.GetWorkflows}";
+
+            var response = await _httpClient.GetAsync(endpointUrl, cancellationToken);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync(cancellationToken);
+
+                return JsonSerializer.Deserialize<IEnumerable<Workflow>>(jsonString);
+            }
+
+            throw new Exception($"Error fetching workflows: {response.ReasonPhrase}");
+        }
+    }
+}
