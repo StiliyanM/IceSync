@@ -1,9 +1,13 @@
-using IceSync.BackgroundServices;
+using IceSync.BackgroundServices.Extensions;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((hostContext, services) =>
     {
-        services.AddHostedService<Worker>();
+        var configuration = hostContext.Configuration;
+
+
+        services.ConfigureServices(configuration);
+
     })
     .Build();
 

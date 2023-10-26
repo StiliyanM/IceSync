@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Application", "IceS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Infrastructure", "IceSync.Infrastructure\IceSync.Infrastructure.csproj", "{8B91C7C8-49FB-4B18-9080-2BDE1C0D5AC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.SharedConfig", "IceSync.SharedConfig\IceSync.SharedConfig.csproj", "{1BB2D3D8-87F8-4520-811F-03D562949B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Domain", "IceSync.Domain\IceSync.Domain.csproj", "{77E10313-1621-4C91-AE85-FABEEDD56DD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{8B91C7C8-49FB-4B18-9080-2BDE1C0D5AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B91C7C8-49FB-4B18-9080-2BDE1C0D5AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B91C7C8-49FB-4B18-9080-2BDE1C0D5AC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB2D3D8-87F8-4520-811F-03D562949B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB2D3D8-87F8-4520-811F-03D562949B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB2D3D8-87F8-4520-811F-03D562949B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB2D3D8-87F8-4520-811F-03D562949B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E10313-1621-4C91-AE85-FABEEDD56DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E10313-1621-4C91-AE85-FABEEDD56DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E10313-1621-4C91-AE85-FABEEDD56DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E10313-1621-4C91-AE85-FABEEDD56DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

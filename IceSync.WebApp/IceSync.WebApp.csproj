@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IceSync.Application\IceSync.Application.csproj" />
     <ProjectReference Include="..\IceSync.Infrastructure\IceSync.Infrastructure.csproj" />
   </ItemGroup>
 

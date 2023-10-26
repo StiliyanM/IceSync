@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IceSync.Domain\IceSync.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

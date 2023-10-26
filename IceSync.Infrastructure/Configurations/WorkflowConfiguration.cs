@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using IceSync.Infrastructure.Models;
+using IceSync.Domain.Models;
 
 namespace IceSync.Infrastructure.Configurations
 {

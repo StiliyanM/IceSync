@@ -1,6 +1,6 @@
-﻿using IceSync.Infrastructure.Models;
+﻿using IceSync.Domain.Models;
 
-namespace IceSync.Infrastructure.Interfaces
+namespace IceSync.Domain.Interfaces
 {
     public interface IUniversalLoaderApiClient
     {

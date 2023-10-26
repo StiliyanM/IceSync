@@ -1,6 +1,6 @@
-﻿using IceSync.Infrastructure.Interfaces;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net;
+using IceSync.Domain.Interfaces;
 
 namespace IceSync.Infrastructure.Http
 {

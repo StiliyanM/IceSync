@@ -1,7 +1,6 @@
-using IceSync.Infrastructure;
 using IceSync.Infrastructure.Extensions;
 using IceSync.WebApp.Extensions;
-using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +10,9 @@ builder.Services.AddRazorPages();
 var configuration = builder.Configuration;
 builder.Services.AddWebAppServices(configuration)
     .AddInfrastructureServices(configuration);
+
+builder.Services
+    .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
 

@@ -1,17 +1,18 @@
-﻿using IceSync.Infrastructure.Interfaces;
-using IceSync.Infrastructure.Models;
+﻿using IceSync.Domain.Models;
 using IceSync.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
+using IceSync.Domain.Interfaces;
 
-namespace IceSync.Infrastructure.Services
+namespace IceSync.Domain.Services
 {
     public class UniversalLoaderApiClient : IUniversalLoaderApiClient
     {
         private readonly HttpClient _httpClient;
         private readonly IOptionsMonitor<UniversalLoaderApiSettings> _apiSettingsMonitor;
 
-        public UniversalLoaderApiClient(HttpClient httpClient, IOptionsMonitor<UniversalLoaderApiSettings> apiSettingsMonitor)
+        public UniversalLoaderApiClient(
+            HttpClient httpClient, IOptionsMonitor<UniversalLoaderApiSettings> apiSettingsMonitor)
         {
             _httpClient = httpClient;
             _apiSettingsMonitor = apiSettingsMonitor;

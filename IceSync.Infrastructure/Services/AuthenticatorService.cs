@@ -1,8 +1,8 @@
-﻿using IceSync.Infrastructure.Interfaces;
-using IceSync.Infrastructure.Settings;
+﻿using IceSync.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text;
+using IceSync.Domain.Interfaces;
 
 namespace IceSync.Infrastructure.Services;
 

@@ -1,5 +1,7 @@
-﻿using IceSync.Infrastructure.Http;
-using IceSync.Infrastructure.Interfaces;
+﻿using IceSync.Domain.Interfaces;
+using IceSync.Domain.Services;
+using IceSync.Infrastructure.Http;
+using IceSync.Infrastructure.Repositories;
 using IceSync.Infrastructure.Services;
 using IceSync.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +12,15 @@ namespace IceSync.Infrastructure.Extensions
 {
     public static class InfrastructureServiceExtensions
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureServices(
+            this IServiceCollection services, IConfiguration configuration)
             => services
             .AddDatabase(configuration)
             .AddSettings(configuration)
+            .AddAuthenticatorService()
             .AddUniversalLoaderServices()
-            .AddUniversalLoaderHttpClient(configuration);
+            .AddUniversalLoaderHttpClient(configuration)
+            .AddRepositories();
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
@@ -41,7 +46,7 @@ namespace IceSync.Infrastructure.Extensions
 
         private static IServiceCollection AddUniversalLoaderHttpClient(this IServiceCollection services, IConfiguration configuration)
         {
-            var settingsSection = configuration.GetSection(nameof(UniversalLoaderApiSettings)) 
+            var settingsSection = configuration.GetSection(nameof(UniversalLoaderApiSettings))
                 ?? throw new InvalidOperationException("UniversalLoaderApiSettings section is missing in the configuration.");
             var settings = settingsSection.Get<UniversalLoaderApiSettings>();
             if (settings == null || string.IsNullOrWhiteSpace(settings.BaseApiUrl))
@@ -57,6 +62,11 @@ namespace IceSync.Infrastructure.Extensions
 
             return services;
         }
-    }
 
+        private static IServiceCollection AddRepositories(this IServiceCollection services)
+            => services.AddScoped<IWorkflowRepository, WorkflowRepository>();
+
+        private static IServiceCollection AddAuthenticatorService(this IServiceCollection services)
+            => services.AddTransient<IAuthenticatorService, AuthenticatorService>();
+    }
 }

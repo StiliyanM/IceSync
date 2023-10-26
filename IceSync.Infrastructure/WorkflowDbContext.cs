@@ -1,5 +1,5 @@
-﻿using IceSync.Infrastructure.Configurations;
-using IceSync.Infrastructure.Models;
+﻿using IceSync.Domain.Models;
+using IceSync.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IceSync.Infrastructure;

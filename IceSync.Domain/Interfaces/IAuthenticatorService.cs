@@ -1,4 +1,4 @@
-﻿namespace IceSync.Infrastructure.Interfaces;
+﻿namespace IceSync.Domain.Interfaces;
 
 public interface IAuthenticatorService
 {
