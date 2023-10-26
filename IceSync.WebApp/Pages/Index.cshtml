@@ -1,10 +1,66 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div id="alert-message" class="alert alert-info" style="display:none;"></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Workflow Id</th>
+            <th>Workflow Name</th>
+            <th>Is Active</th>
+            <th>Is Running</th>
+            <th>Multi Exec Behavior</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var workflow in Model.Workflows)
+        {
+            <tr>
+                <td>@workflow.WorkflowId</td>
+                <td>@workflow.WorkflowName</td>
+                <td>@workflow.IsActive</td>
+                <td>@workflow.IsRunning</td>
+                <td>@workflow.MultiExecBehavior</td>
+                <td>
+                    <button 
+                        onclick="runWorkflow('@Model.GetRunWorkflowUrl(workflow.WorkflowId)')" 
+                        class="btn btn-primary">Run</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        async function runWorkflow(workflowUrl) {
+            try {
+                let response = await fetch(workflowUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                let result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('alert-message').innerText = "Workflow run was successful.";
+                    document.getElementById('alert-message').style.display = "block";
+                } else {
+                    document.getElementById('alert-message').innerText = "Failed to run the workflow.";
+                    document.getElementById('alert-message').style.display = "block";
+                }
+
+            } catch (error) {
+                console.log('There was a problem with the fetch operation:', error.message);
+            }
+        }
+    </script>
+}

@@ -8,6 +8,8 @@ public class UniversalLoaderApiSettings
 
     public required string WorkflowsEndpoint { get; set; }
 
+    public required string RunWorkflowEndpoint { get; set; }
+
     public required string ApiCompanyId { get; set; }
 
     public required string ApiUserId { get; set; }

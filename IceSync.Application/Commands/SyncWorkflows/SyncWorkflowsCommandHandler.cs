@@ -1,7 +1,7 @@
 ﻿using IceSync.Domain.Interfaces;
 using MediatR;
 
-namespace IceSync.Application.Commands
+namespace IceSync.Application.Commands.SyncWorkflows
 {
     public class SyncWorkflowsCommandHandler : IRequestHandler<SyncWorkflowsCommand, Unit>
     {

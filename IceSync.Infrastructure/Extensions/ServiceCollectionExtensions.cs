@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IceSync.Infrastructure.Extensions
 {
-    public static class InfrastructureServiceExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddInfrastructureServices(
             this IServiceCollection services, IConfiguration configuration)
@@ -32,8 +32,9 @@ namespace IceSync.Infrastructure.Extensions
             return services;
         }
 
-        private static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration configuration)
-            => services.Configure<UniversalLoaderApiSettings>(options =>
+        private static IServiceCollection AddSettings(
+            this IServiceCollection services, IConfiguration configuration)
+            => services.Configure<UniversalLoaderApiSettings>(
                 configuration.GetSection(nameof(UniversalLoaderApiSettings)));
 
         private static IServiceCollection AddUniversalLoaderServices(this IServiceCollection services)
