@@ -20,17 +20,17 @@ public class IndexModel : PageModel
 
     public IEnumerable<WorkflowViewModel> Workflows { get; set; } = new List<WorkflowViewModel>();
 
-    public string GetRunWorkflowUrl(int workflowId) => string.Format(
+    public string GetRunWorkflowUrl(int id) => string.Format(
         _universalApiSettingsMonitor.CurrentValue.RunWorkflowEndpoint,
-        workflowId);
-
+        id);
+    
     public async Task OnGetAsync()
     {
         var workflows = await _mediator.Send(new GetAllWorkflowsQuery());
         Workflows = workflows.Select(w => new WorkflowViewModel
         {
-            WorkflowId = w.WorkflowId,
-            WorkflowName = w.WorkflowName,
+            Id = w.Id,
+            Name = w.Name,
             MultiExecBehavior = w.MultiExecBehavior,
             IsRunning = w.IsRunning,
             IsActive = w.IsActive  

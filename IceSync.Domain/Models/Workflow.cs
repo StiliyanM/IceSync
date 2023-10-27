@@ -2,9 +2,9 @@
 {
     public class Workflow
     {
-        public int WorkflowId { get; set; }
+        public int Id { get; set; }
 
-        public string? WorkflowName { get; set; }
+        public string? Name { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -16,8 +16,8 @@
         {
             if (obj is Workflow otherWorkflow)
             {
-                return WorkflowId == otherWorkflow.WorkflowId &&
-                       WorkflowName == otherWorkflow.WorkflowName &&
+                return Id == otherWorkflow.Id &&
+                       Name == otherWorkflow.Name &&
                        IsActive == otherWorkflow.IsActive &&
                        IsRunning == otherWorkflow.IsRunning &&
                        MultiExecBehavior == otherWorkflow.MultiExecBehavior;
@@ -27,7 +27,7 @@
 
         public override int GetHashCode()
         {
-            return WorkflowId.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

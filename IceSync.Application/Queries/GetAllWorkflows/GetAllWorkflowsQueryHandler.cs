@@ -20,8 +20,8 @@ namespace IceSync.Application.Queries.GetAllWorkflows
 
             return workflows.Select(w => new GetAllWorkflowsQueryResult
             {
-                WorkflowId = w.WorkflowId,
-                WorkflowName = w.WorkflowName,
+                Id = w.Id,
+                Name = w.Name,
                 MultiExecBehavior = w.MultiExecBehavior,
                 IsActive = w.IsActive,
                 IsRunning = w.IsRunning,

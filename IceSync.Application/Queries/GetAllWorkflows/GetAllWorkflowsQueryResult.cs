@@ -2,9 +2,9 @@
 {
     public class GetAllWorkflowsQueryResult
     {
-        public int WorkflowId { get; set; }
+        public int Id { get; set; }
 
-        public string? WorkflowName { get; set; }
+        public string? Name { get; set; }
 
         public bool IsActive { get; set; }
 

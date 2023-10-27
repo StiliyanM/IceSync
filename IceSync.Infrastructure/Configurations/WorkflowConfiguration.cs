@@ -8,9 +8,9 @@ namespace IceSync.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Workflow> builder)
         {
-            builder.HasKey(w => w.WorkflowId);
+            builder.HasKey(w => w.Id);
 
-            builder.Property(w => w.WorkflowId)
+            builder.Property(w => w.Id)
                    .ValueGeneratedNever(); // Assuming the ID comes from an external system and is not auto-generated.
         }
     }

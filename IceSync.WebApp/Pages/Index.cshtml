@@ -18,14 +18,14 @@
         @foreach (var workflow in Model.Workflows)
         {
             <tr>
-                <td>@workflow.WorkflowId</td>
-                <td>@workflow.WorkflowName</td>
+                <td>@workflow.Id</td>
+                <td>@workflow.Name</td>
                 <td>@workflow.IsActive</td>
                 <td>@workflow.IsRunning</td>
                 <td>@workflow.MultiExecBehavior</td>
                 <td>
                     <button 
-                        onclick="runWorkflow('@Model.GetRunWorkflowUrl(workflow.WorkflowId)')" 
+                        onclick="runWorkflow('@Model.GetRunWorkflowUrl(workflow.Id)')" 
                         class="btn btn-primary">Run</button>
                 </td>
             </tr>

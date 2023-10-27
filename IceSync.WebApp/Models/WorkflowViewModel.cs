@@ -2,13 +2,13 @@
 
 public class WorkflowViewModel
 {
-    public int WorkflowId { get; set; }
+    public int Id { get; set; }
 
-    public required string WorkflowName { get; set; }
+    public string? Name { get; set; }
 
     public bool IsActive { get; set; }
 
     public bool IsRunning { get; set; }
 
-    public required string MultiExecBehavior { get; set; }
+    public string? MultiExecBehavior { get; set; }
 }
