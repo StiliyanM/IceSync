@@ -20,8 +20,12 @@ namespace IceSync.Application.Commands.SyncWorkflows
             var apiWorkflows = await _apiClient.GetWorkflowsAsync(cancellationToken);
             var dbWorkflows = await _workflowRepository.GetAllAsync(cancellationToken);
 
-            var workflowsToInsert = apiWorkflows.Except(dbWorkflows).ToList();
-            var workflowsToDelete = dbWorkflows.Except(apiWorkflows).ToList();
+            var apiWorkflowIds = new HashSet<int>(apiWorkflows.Select(w => w.Id));
+            var dbWorkflowIds = new HashSet<int>(dbWorkflows.Select(w => w.Id));
+
+            var workflowsToInsert = apiWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id)).ToList();
+            var workflowsToDelete = dbWorkflows.Where(w => !apiWorkflowIds.Contains(w.Id)).ToList();
+
             var workflowsToUpdate = apiWorkflows.Intersect(dbWorkflows).ToList();
 
             await _workflowRepository.InsertManyAsync(workflowsToInsert, cancellationToken);
