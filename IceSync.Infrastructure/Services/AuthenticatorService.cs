@@ -33,8 +33,9 @@ public class AuthenticatorService : IAuthenticatorService
             apiUserSecret = settings.ApiUserSecret
         };
 
+        var authenticationEndpoint = $"{settings.BaseApiUrl}{settings.AuthenticateEndpoint}";
         var response = await _httpClient
-            .PostAsync(settings.AuthenticateEndpoint, 
+            .PostAsync(authenticationEndpoint, 
             new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json"), 
             cancellationToken);
 
