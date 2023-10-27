@@ -30,7 +30,12 @@ namespace IceSync.Domain.Services
             {
                 var jsonString = await response.Content.ReadAsStringAsync(cancellationToken);
 
-                return JsonSerializer.Deserialize<IEnumerable<Workflow>>(jsonString) ?? 
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                return JsonSerializer.Deserialize<IEnumerable<Workflow>>(jsonString, options) ?? 
                     throw new InvalidOperationException("Failed to deserialize response.");
             }
 
