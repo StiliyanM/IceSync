@@ -4,19 +4,23 @@
     {
         public int WorkflowId { get; set; }
 
-        public required string WorkflowName { get; set; }
+        public string? WorkflowName { get; set; }
 
         public bool IsActive { get; set; }
 
         public bool IsRunning { get; set; }
 
-        public required string MultiExecBehavior { get; set; }
+        public string? MultiExecBehavior { get; set; }
 
         public override bool Equals(object? obj)
         {
             if (obj is Workflow otherWorkflow)
             {
-                return WorkflowId == otherWorkflow.WorkflowId;
+                return WorkflowId == otherWorkflow.WorkflowId &&
+                       WorkflowName == otherWorkflow.WorkflowName &&
+                       IsActive == otherWorkflow.IsActive &&
+                       IsRunning == otherWorkflow.IsRunning &&
+                       MultiExecBehavior == otherWorkflow.MultiExecBehavior;
             }
             return false;
         }

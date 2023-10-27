@@ -14,7 +14,8 @@ namespace IceSync.Infrastructure.Http
             _authenticatorService = authenticatorService;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var token = await _authenticatorService.AuthenticateAsync(cancellationToken);
             request.Headers.Authorization = new AuthenticationHeaderValue(BearerScheme, token);

@@ -28,6 +28,7 @@ namespace IceSync.Application.Commands.SyncWorkflows
             await _workflowRepository.DeleteManyAsync(workflowsToDelete, cancellationToken);
             await _workflowRepository.UpdateManyAsync(workflowsToUpdate, cancellationToken);
 
+            await _workflowRepository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
