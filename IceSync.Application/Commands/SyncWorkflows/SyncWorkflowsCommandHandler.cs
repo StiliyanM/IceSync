@@ -26,7 +26,9 @@ namespace IceSync.Application.Commands.SyncWorkflows
             var workflowsToInsert = externalWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id)).ToList();
             var workflowsToDelete = dbWorkflows.Where(w => !externalWorkflowIds.Contains(w.Id)).ToList();
 
-            var workflowsToUpdate = externalWorkflows.Intersect(dbWorkflows).ToList();
+            var potentialUpdates = externalWorkflows.Where(w => dbWorkflowIds.Contains(w.Id)).ToList();
+            var workflowsToUpdate = potentialUpdates
+                .Where(ew => !ew.Equals(dbWorkflows.First(dbw => dbw.Id == ew.Id))).ToList();
 
             await _workflowRepository.InsertManyAsync(workflowsToInsert, cancellationToken);
             await _workflowRepository.DeleteManyAsync(workflowsToDelete, cancellationToken);
