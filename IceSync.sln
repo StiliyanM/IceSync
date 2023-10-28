@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.WebApp", "IceSync.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.BackgroundServices", "IceSync.BackgroundServices\IceSync.BackgroundServices.csproj", "{24695591-CF46-47C8-A41D-98749C4C4D9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Tests", "IceSync.Tests\IceSync.Tests.csproj", "{33796B0C-65F8-4FB9-9FF1-5DF6C1064043}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Application", "IceSync.Application\IceSync.Application.csproj", "{048C466D-A2A2-4888-AB57-DE605A1A5A88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Infrastructure", "IceSync.Infrastructure\IceSync.Infrastructure.csproj", "{8B91C7C8-49FB-4B18-9080-2BDE1C0D5AC8}"
@@ -29,10 +27,6 @@ Global
 		{24695591-CF46-47C8-A41D-98749C4C4D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24695591-CF46-47C8-A41D-98749C4C4D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24695591-CF46-47C8-A41D-98749C4C4D9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33796B0C-65F8-4FB9-9FF1-5DF6C1064043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33796B0C-65F8-4FB9-9FF1-5DF6C1064043}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33796B0C-65F8-4FB9-9FF1-5DF6C1064043}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33796B0C-65F8-4FB9-9FF1-5DF6C1064043}.Release|Any CPU.Build.0 = Release|Any CPU
 		{048C466D-A2A2-4888-AB57-DE605A1A5A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{048C466D-A2A2-4888-AB57-DE605A1A5A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{048C466D-A2A2-4888-AB57-DE605A1A5A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
