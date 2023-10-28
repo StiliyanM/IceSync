@@ -55,7 +55,7 @@ namespace IceSync.Infrastructure.Extensions
                 throw new InvalidOperationException("UniversalLoaderApiSettings configuration is invalid.");
             }
 
-            services.AddHttpClient<IUniversalLoaderApiClient, UniversalLoaderApiClient>(client =>
+            services.AddHttpClient<IWorkflowExternalService, UniversalLoaderApiClient>(client =>
             {
                 client.BaseAddress = new Uri(settings.BaseApiUrl);
             })

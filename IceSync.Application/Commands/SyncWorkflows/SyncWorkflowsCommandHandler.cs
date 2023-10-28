@@ -3,38 +3,36 @@ using MediatR;
 
 namespace IceSync.Application.Commands.SyncWorkflows
 {
-    public class SyncWorkflowsCommandHandler : IRequestHandler<SyncWorkflowsCommand, Unit>
+    public class SyncWorkflowsCommandHandler : IRequestHandler<SyncWorkflowsCommand>
     {
-        private readonly IUniversalLoaderApiClient _apiClient;
+        private readonly IWorkflowExternalService _workflowExternalService;
         private readonly IWorkflowRepository _workflowRepository;
 
         public SyncWorkflowsCommandHandler(
-            IUniversalLoaderApiClient apiClient, IWorkflowRepository workflowRepository)
+            IWorkflowExternalService workflowExternalService, IWorkflowRepository workflowRepository)
         {
-            _apiClient = apiClient;
+            _workflowExternalService = workflowExternalService;
             _workflowRepository = workflowRepository;
         }
 
-        public async Task<Unit> Handle(SyncWorkflowsCommand request, CancellationToken cancellationToken)
+        public async Task Handle(SyncWorkflowsCommand request, CancellationToken cancellationToken)
         {
-            var apiWorkflows = await _apiClient.GetWorkflowsAsync(cancellationToken);
+            var externalWorkflows = await _workflowExternalService.GetWorkflowsAsync(cancellationToken);
             var dbWorkflows = await _workflowRepository.GetAllAsync(cancellationToken);
 
-            var apiWorkflowIds = new HashSet<int>(apiWorkflows.Select(w => w.Id));
+            var externalWorkflowIds = new HashSet<int>(externalWorkflows.Select(w => w.Id));
             var dbWorkflowIds = new HashSet<int>(dbWorkflows.Select(w => w.Id));
 
-            var workflowsToInsert = apiWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id)).ToList();
-            var workflowsToDelete = dbWorkflows.Where(w => !apiWorkflowIds.Contains(w.Id)).ToList();
+            var workflowsToInsert = externalWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id)).ToList();
+            var workflowsToDelete = dbWorkflows.Where(w => !externalWorkflowIds.Contains(w.Id)).ToList();
 
-            var workflowsToUpdate = apiWorkflows.Intersect(dbWorkflows).ToList();
+            var workflowsToUpdate = externalWorkflows.Intersect(dbWorkflows).ToList();
 
             await _workflowRepository.InsertManyAsync(workflowsToInsert, cancellationToken);
             await _workflowRepository.DeleteManyAsync(workflowsToDelete, cancellationToken);
             await _workflowRepository.UpdateManyAsync(workflowsToUpdate, cancellationToken);
 
             await _workflowRepository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }

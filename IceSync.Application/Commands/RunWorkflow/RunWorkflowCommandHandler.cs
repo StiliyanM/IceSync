@@ -6,14 +6,14 @@ namespace IceSync.Application.Commands.RunWorkflow
 {
     public class RunWorkflowCommandHandler : IRequestHandler<RunWorkflowCommand, bool>
     {
-        private readonly IUniversalLoaderApiClient _apiClient;
+        private readonly IWorkflowExternalService _workflowExternalService;
 
-        public RunWorkflowCommandHandler(IUniversalLoaderApiClient apiClient)
+        public RunWorkflowCommandHandler(IWorkflowExternalService workflowExternalService)
         {
-            _apiClient = apiClient;
+            _workflowExternalService = workflowExternalService;
         }
 
         public async Task<bool> Handle(RunWorkflowCommand request, CancellationToken cancellationToken)
-            => await _apiClient.RunWorkflowAsync(request.Id, cancellationToken);
+            => await _workflowExternalService.RunWorkflowAsync(request.Id, cancellationToken);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace IceSync.Domain.Interfaces
 {
-    public interface IUniversalLoaderApiClient
+    public interface IWorkflowExternalService
     {
         Task<IEnumerable<Workflow>> GetWorkflowsAsync(CancellationToken cancellationToken);
 

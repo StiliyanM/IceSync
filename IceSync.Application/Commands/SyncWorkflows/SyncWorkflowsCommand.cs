@@ -2,4 +2,4 @@
 
 namespace IceSync.Application.Commands.SyncWorkflows;
 
-public record SyncWorkflowsCommand : IRequest<Unit>;
+public record SyncWorkflowsCommand : IRequest { };

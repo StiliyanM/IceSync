@@ -6,7 +6,7 @@ using IceSync.Domain.Interfaces;
 
 namespace IceSync.Domain.Services
 {
-    public class UniversalLoaderApiClient : IUniversalLoaderApiClient
+    public class UniversalLoaderApiClient : IWorkflowExternalService
     {
         private readonly HttpClient _httpClient;
         private readonly IOptionsMonitor<UniversalLoaderApiSettings> _apiSettingsMonitor;
