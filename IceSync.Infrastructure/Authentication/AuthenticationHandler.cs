@@ -2,7 +2,7 @@
 using System.Net;
 using IceSync.Domain.Interfaces;
 
-namespace IceSync.Infrastructure.Http
+namespace IceSync.Infrastructure.Authentication
 {
     public class AuthenticationHandler : DelegatingHandler
     {

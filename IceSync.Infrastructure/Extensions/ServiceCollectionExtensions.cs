@@ -1,6 +1,6 @@
 ﻿using IceSync.Domain.Interfaces;
 using IceSync.Domain.Services;
-using IceSync.Infrastructure.Http;
+using IceSync.Infrastructure.Authentication;
 using IceSync.Infrastructure.Repositories;
 using IceSync.Infrastructure.Services;
 using IceSync.Infrastructure.Settings;
