@@ -51,15 +51,14 @@
                 let result = await response.json();
 
                 if (result.success) {
-                    document.getElementById('alert-message').innerText = "Workflow run was successful.";
-                    document.getElementById('alert-message').style.display = "block";
+                    toastr.success("Workflow run was successful.");
                 } else {
-                    document.getElementById('alert-message').innerText = "Failed to run the workflow.";
-                    document.getElementById('alert-message').style.display = "block";
+                    toastr.error("Failed to run the workflow.");
                 }
 
             } catch (error) {
                 console.log('There was a problem with the fetch operation:', error.message);
+                toastr.error('Something went wrong. Please try again later.');
             }
         }
     </script>

@@ -1,29 +1,27 @@
-﻿using IceSync.Application.Queries.GetAllWorkflows;
-using IceSync.Infrastructure.Settings;
+﻿using IceSync.Application.Commands.SyncWorkflows;
+using IceSync.Application.Queries.GetAllWorkflows;
 using IceSync.WebApp.Models;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Options;
 
 namespace IceSync.WebApp.Pages;
 
+[IgnoreAntiforgeryToken]
 public class IndexModel : PageModel
 {
     private readonly IMediator _mediator;
-    private readonly IOptionsMonitor<UniversalLoaderApiSettings> _universalApiSettingsMonitor;
 
-    public IndexModel(IMediator mediator, IOptionsMonitor<UniversalLoaderApiSettings> universalApiSettingsMonitor)
+    public IndexModel(IMediator mediator)
     {
         _mediator = mediator;
-        _universalApiSettingsMonitor = universalApiSettingsMonitor;
     }
 
     public IEnumerable<WorkflowViewModel> Workflows { get; set; } = new List<WorkflowViewModel>();
 
-    public string GetRunWorkflowUrl(int id) => string.Format(
-        _universalApiSettingsMonitor.CurrentValue.RunWorkflowEndpoint,
-        id);
-    
+    public string GetRunWorkflowUrl(int id)
+        => $"/Index?handler=Run&id={id}";
+
     public async Task OnGetAsync()
     {
         var workflows = await _mediator.Send(new GetAllWorkflowsQuery());
@@ -33,7 +31,14 @@ public class IndexModel : PageModel
             Name = w.Name,
             MultiExecBehavior = w.MultiExecBehavior,
             IsRunning = w.IsRunning,
-            IsActive = w.IsActive  
+            IsActive = w.IsActive
         });
+    }
+
+    public async Task<IActionResult> OnPostRunAsync(int id)
+    {
+        var result = await _mediator.Send(new RunWorkflowCommand(id));
+
+        return new JsonResult(new { success = result });
     }
 }

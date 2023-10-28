@@ -41,5 +41,20 @@ namespace IceSync.Domain.Services
 
             throw new Exception($"Error fetching workflows: {response.ReasonPhrase}");
         }
+
+        public async Task<bool> RunWorkflowAsync(int id, CancellationToken cancellationToken)
+        {
+            var settings = _apiSettingsMonitor.CurrentValue;
+            string endpointUrl = $"{settings.BaseApiUrl}{string.Format(settings.RunWorkflowEndpoint, id)}";
+
+            var response = await _httpClient.PostAsync(endpointUrl, null, cancellationToken);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
