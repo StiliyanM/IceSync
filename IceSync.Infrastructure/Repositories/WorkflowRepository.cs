@@ -21,36 +21,36 @@ public class WorkflowRepository : IWorkflowRepository
     public async Task InsertManyAsync(
         IEnumerable<Workflow> workflows, 
         CancellationToken cancellationToken, 
-        bool commitImmediately = true)
+        bool commitImmediately)
     {
         await _context.Workflows.AddRangeAsync(workflows, cancellationToken);
         if (commitImmediately)
         {
-            await _context.SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
         }
     }
 
     public async Task UpdateManyAsync(
         IEnumerable<Workflow> workflows, 
         CancellationToken cancellationToken, 
-        bool commitImmediately = true)
+        bool commitImmediately)
     {
         _context.Workflows.UpdateRange(workflows);
         if (commitImmediately)
         {
-            await _context.SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
         }
     }
 
     public async Task DeleteManyAsync(
         IEnumerable<Workflow> workflows, 
         CancellationToken cancellationToken, 
-        bool commitImmediately = true)
+        bool commitImmediately)
     {
         _context.Workflows.RemoveRange(workflows);
         if (commitImmediately)
         {
-            await _context.SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
         }
     }
 

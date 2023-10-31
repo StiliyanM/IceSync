@@ -45,10 +45,12 @@ namespace IceSync.Infrastructure.Extensions
             return services;
         }
 
-        private static IServiceCollection AddUniversalLoaderHttpClient(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddUniversalLoaderHttpClient(
+            this IServiceCollection services, IConfiguration configuration)
         {
             var settingsSection = configuration.GetSection(nameof(UniversalLoaderApiSettings))
-                ?? throw new InvalidOperationException("UniversalLoaderApiSettings section is missing in the configuration.");
+                ?? throw new InvalidOperationException(
+                    "UniversalLoaderApiSettings section is missing in the configuration.");
             var settings = settingsSection.Get<UniversalLoaderApiSettings>();
             if (settings == null || string.IsNullOrWhiteSpace(settings.BaseApiUrl))
             {

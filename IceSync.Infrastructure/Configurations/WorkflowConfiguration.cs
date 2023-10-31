@@ -11,7 +11,7 @@ namespace IceSync.Infrastructure.Configurations
             builder.HasKey(w => w.Id);
 
             builder.Property(w => w.Id)
-                   .ValueGeneratedNever(); // Assuming the ID comes from an external system and is not auto-generated.
+                   .ValueGeneratedNever();
         }
     }
 }
