@@ -11,6 +11,8 @@ public interface IWorkflowRepository
 
     Task<IEnumerable<Workflow>> GetAllAsync(CancellationToken cancellationToken);
 
+    Task<IEnumerable<Workflow>> GetAllAsNoTrackingAsync(CancellationToken cancellationToken);
+
     Task InsertManyAsync(
         IEnumerable<Workflow> workflows, 
         CancellationToken cancellationToken, 

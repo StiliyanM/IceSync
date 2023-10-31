@@ -14,13 +14,14 @@ public class WorkflowRepository : IWorkflowRepository
     }
 
     public async Task<IEnumerable<Workflow>> GetAllAsync(CancellationToken cancellationToken)
-    {
-        return await _context.Workflows.ToListAsync(cancellationToken);
-    }
+        => await _context.Workflows.ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<Workflow>> GetAllAsNoTrackingAsync(CancellationToken cancellationToken)
+        => await _context.Workflows.AsNoTracking().ToListAsync(cancellationToken);
 
     public async Task InsertManyAsync(
-        IEnumerable<Workflow> workflows, 
-        CancellationToken cancellationToken, 
+        IEnumerable<Workflow> workflows,
+        CancellationToken cancellationToken,
         bool commitImmediately)
     {
         await _context.Workflows.AddRangeAsync(workflows, cancellationToken);
@@ -31,8 +32,8 @@ public class WorkflowRepository : IWorkflowRepository
     }
 
     public async Task UpdateManyAsync(
-        IEnumerable<Workflow> workflows, 
-        CancellationToken cancellationToken, 
+        IEnumerable<Workflow> workflows,
+        CancellationToken cancellationToken,
         bool commitImmediately)
     {
         _context.Workflows.UpdateRange(workflows);
@@ -43,8 +44,8 @@ public class WorkflowRepository : IWorkflowRepository
     }
 
     public async Task DeleteManyAsync(
-        IEnumerable<Workflow> workflows, 
-        CancellationToken cancellationToken, 
+        IEnumerable<Workflow> workflows,
+        CancellationToken cancellationToken,
         bool commitImmediately)
     {
         _context.Workflows.RemoveRange(workflows);
@@ -55,7 +56,5 @@ public class WorkflowRepository : IWorkflowRepository
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-    {
-        return await _context.SaveChangesAsync(cancellationToken);
-    }
+        => await _context.SaveChangesAsync(cancellationToken);
 }

@@ -16,7 +16,7 @@ namespace IceSync.Application.Queries.GetAllWorkflows
         public async Task<IEnumerable<GetAllWorkflowsQueryResult>> Handle(
             GetAllWorkflowsQuery request, CancellationToken cancellationToken)
         {
-            var workflows = await _workflowRepository.GetAllAsync(cancellationToken);
+            var workflows = await _workflowRepository.GetAllAsNoTrackingAsync(cancellationToken);
 
             return workflows.Select(w => new GetAllWorkflowsQueryResult
             {

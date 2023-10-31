@@ -18,17 +18,16 @@ namespace IceSync.Application.Commands.SyncWorkflows
         public async Task Handle(SyncWorkflowsCommand request, CancellationToken cancellationToken)
         {
             var externalWorkflows = await _workflowExternalService.GetWorkflowsAsync(cancellationToken);
-            var dbWorkflows = await _workflowRepository.GetAllAsync(cancellationToken);
+            var dbWorkflows = await _workflowRepository.GetAllAsNoTrackingAsync(cancellationToken);
 
             var externalWorkflowIds = new HashSet<int>(externalWorkflows.Select(w => w.Id));
             var dbWorkflowIds = new HashSet<int>(dbWorkflows.Select(w => w.Id));
 
-            var workflowsToInsert = externalWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id)).ToList();
-            var workflowsToDelete = dbWorkflows.Where(w => !externalWorkflowIds.Contains(w.Id)).ToList();
-
-            var potentialUpdates = externalWorkflows.Where(w => dbWorkflowIds.Contains(w.Id)).ToList();
+            var workflowsToInsert = externalWorkflows.Where(w => !dbWorkflowIds.Contains(w.Id));
+            var workflowsToDelete = dbWorkflows.Where(w => !externalWorkflowIds.Contains(w.Id));
+            var potentialUpdates = externalWorkflows.Where(w => dbWorkflowIds.Contains(w.Id));
             var workflowsToUpdate = potentialUpdates
-                .Where(ew => !ew.Equals(dbWorkflows.First(dbw => dbw.Id == ew.Id))).ToList();
+                .Where(ew => !ew.Equals(dbWorkflows.First(dbw => dbw.Id == ew.Id)));
 
             await _workflowRepository.InsertManyAsync(workflowsToInsert, cancellationToken);
             await _workflowRepository.DeleteManyAsync(workflowsToDelete, cancellationToken);
